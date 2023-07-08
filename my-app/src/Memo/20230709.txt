@@ -1,0 +1,154 @@
+JSX
+개념
+- 자바스크립트의 확장 문법
+- JavaScript + XML/HTML
+- JSX 코드 예제 문법
+  : const element = <h1>Hello, world!</h1>; 
+   (위 문법에서는 createElement를 사용하지는 않았지만 자동으로 변환해줌)
+
+JSX 코드를 자바스크립트 코드 : React.createElement
+
+React.createElement(
+   type,   // element의 유형
+   [props], // 속성
+   [...children] // 현재 element가 포함하고있는 자식
+)
+- 리액트는 JSX를 필수적으로 사용하지 않아도 되지만, 간결하고 편리하다는 장점이 있음
+
+JSX의 장점
+1. 소스가 간결해짐
+2. 가독성 향상 +) 버그를 발견하기 쉬움
+3. injection Attacks 방어
+
+JSX 사용법
+- 자바스크립트 소스를 사용시에는 {} 중괄호를 입력하여 작성한다.
+  ex) <h1>테스트입니다.{props.name} </h1>
+
+========================================================
+Elements
+- 리액트 앱을 구성하는 가장 작은 블록들
+- 화면에서 보이는 것들을 기술
+- Dom Elements / React Elements
+
+특징
+- 불변성(immutable)
+  : 한번생성된 element는 변하지 않는다.
+  : Elements 생성 후에는 children이나 attributes를 바꿀 수 없다!
+   -> 즉, 생성 된 후에는 변경이 안되며 다른 Elements로 변경(render)
+
+Elements 렌더링
+- ReactDOM.render()
+
+========================================================
+Componets and Props
+- 매우 중요한 부분!! 리액트의 핵심인 것으로 보임
+
+Componets
+- 리액트는 컴포넌트 기반의 구조
+- 레고 블록 조립하듯 컴포넌트들을 모아서 개발
+- 입력 -> React component -> 출력
+ Props                                React element
+- 붕어빵에 비유 > 붕어빵 틀 : Component / 실제 붕어빵 : Element
+
+Props 
+- 입력
+- Property : 속성
+- Component의 속성
+- 예로 붕어빵에 들어가는 재료! ex) Props : 팥, 슈크림, 고구마
+- 컴포넌트에 전달할 다양한 정보를 담고 있는 자바스크립트 객체
+
+특정
+- Read Only : 읽기만 가능, 값을 변경 할 수 없다.
+- 붕어빵이 다 구워졌는데, 속재료를 바꿀 수 없음  
+- props의 값이 달라질 경우에는 새로운 값을 컴포넌트에 전달하여 새로 Element를 생성한다.
+  ㄴ 기존의 값은 변경이 불가능하므로
+- 모든 리액트 컴포넌트는 Props를 직접 바꿀 수 없고, 같은 Props에 대해서는 항상 같은 결과를 보여줄 것!
+  ㄴ 리액트 컴포넌트의 props는 바꿀 수 없고, 같은 Props가 들어오면 같은 Element를 호출한다
+
+사용법
+- props를 사용할 경우에는 문자열을 제외하고는 {} 중괄호를 넣어줘야된다. (JSX를 사용할 경우)
+
+Component 만들기
+1. Function Component 과거에는 사용
+2. Class Component 요즘에 사용
+
+Function Component 예제
+function Welcome(props) {
+   return <h1>안녕, {props.name}</h1>;
+}
+
+Class Component 예제
+class Welcome extends React.Component {
+  render() {
+     return <h1>안녕, {this.props.name}</h1>;
+  }
+}
+
+* Component 이름은 항상 대문자로 시작해야한다.
+ex.) const element = <Welcome name="인제" />;
+    > Welcome이라는 리액트 Component로 인식
+
+Component 렌더링
+ReactDOM.render(elemet, element가 삽입되는 위치)
+
+Component 합성
+- Component안에 또 다른 Component를 쓸 수 있다.
+- 복잡한 화면을 여러 개의 Component로 나눠서 구현 가능!
+
+Component 추출 
+- 큰 컴포넌트를 산산조각 내자!
+- 재사용성 증가 > 개발속도 향상
+
+========================================================
+State와 Lifecycle
+
+State
+- 상태 (리액트 Component의 상태)
+  ㄴ 리액트 Component의 변경 가능한 데이터
+  ㄴ state는 개발자가 정의한다.
+- 렌더링이나 데이터 흐름에 사용되는 값만 state에 포함시켜야함
+- state는 javascript 객체이다.
+- state는 직접 수정 할 수 없으며 하면 안된다.
+  ex.) 자바에서 변수(private) / get / set 과 같은 개념으로 보임  
+
+Lifecycle
+- 생명주기 (리액트 Component의 생명주기)
+- Mounting 
+- Updating
+- Unmounting
+- Component가 계속 존재하는 것이 아니라, 시간의 흐름에 따라 생성되고 업데이트 되다가 사라진다.
+
+========================================================
+
+Hooks
+Funtion Component
+- state 사용 불가
+- Lifecycle에 따른 기능 구현 불가
+- Hooks는 class component의 state사용과 lifecycle를 함수 컴포넌트에서도 사용할 수 있게 도와줌
+
+Class Component
+- 생성자에서 state를 정의
+- setState() 함수를 통해 state 업데이트
+- Lifecycle methods 제공
+
+
+Hooks
+- state 관련 함수, Lifecycle 관련 함수, 최적화 관련 함수
+- 대부분 앞에 use가 붙음
+
+useState()
+- state를 사용하기 위한 Hook
+- { useState } 선언
+- const [변수명, set함수명] = useState(초기값);
+- 변수 각각에 set 함수명이 존재한다.
+
+useEffect()
+- side effect를 수행하기 위한 Hook
+  ㄴ 일반적 > side effect : 부작용
+  ㄴ 리액트 > side effect : 효과, 양향
+  ㄴ 다른 컴포넌트에 영향을 미칠 수 있으며, 렌더링 중에는 작업이 완료될 수 없기 떄문
+  ㄴ 리액트의 함수 컴포넌트에서 side effect를 실행할 수 있게 해주는 Hook
+  ㄴ useEffect는 didmount, willunmount 등의 기능을 해주는 역할
+- useEffect(이펙트 함수, 의존성 배열);
+- 의존성배열의 경우에는 [] 1번만 실행, 비어있을 경우에는 업데이트시에만 계속 발생함
+- return() {...} > ...은 컴포넌트가 마운트 해제되기 전에 실행됨
