@@ -13,16 +13,12 @@ import ConfirmButton from "./chapter_08/ConfirmButton";
 import LendingPage from "./chapter_09/LendingPage";
 import AttendanceBook from "./chapter_10/AttendanceBook";
 import SignUp from "./chapter_11/SignUp";
-import Calculator from "./chapter_12/Calculator";
-import ProfileCard from "./chapter_13/ProfileCard";
-import DarkOrLight from "./chapter_14/DarkOrLight";
-import Blocks from "./chapter_15/Blocks";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <Blocks />
+    <SignUp />
   </React.StrictMode>
 );
 
